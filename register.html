@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Form</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#4facfe,#00f2fe);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    background:#fff;
+    width:400px;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.container h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#333;
+}
+
+.input-group{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:bold;
+    color:#444;
+}
+
+input, select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+input:focus, select:focus{
+    outline:none;
+    border-color:#4facfe;
+}
+
+.error{
+    color:red;
+    font-size:13px;
+    margin-top:5px;
+}
+
+.success{
+    color:green;
+    text-align:center;
+    margin-top:15px;
+    font-weight:bold;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#4facfe;
+    color:white;
+    border:none;
+    border-radius:8px;
+    font-size:17px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#1f8fff;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>Registration Form</h2>
+
+<form id="registrationForm">
+
+<div class="input-group">
+<label>Full Name</label>
+<input type="text" id="name" placeholder="Enter your name">
+<div class="error" id="nameError"></div>
+</div>
+
+<div class="input-group">
+<label>Email</label>
+<input type="email" id="email" placeholder="Enter your email">
+<div class="error" id="emailError"></div>
+</div>
+
+<div class="input-group">
+<label>Phone Number</label>
+<input type="text" id="phone" placeholder="Enter 10-digit phone number">
+<div class="error" id="phoneError"></div>
+</div>
+
+<div class="input-group">
+<label>Select Interest</label>
+
+<select id="interest">
+<option value="">-- Select Interest --</option>
+<option>Art</option>
+<option>Dance</option>
+<option>Music</option>
+<option>Sports</option>
+<option>Coding</option>
+<option>Photography</option>
+<option>Painting</option>
+<option>Singing</option>
+</select>
+
+<div class="error" id="interestError"></div>
+
+</div>
+
+<button type="submit">Register</button>
+
+<div class="success" id="successMsg"></div>
+
+</form>
+
+</div>
+
+<script>
+
+const form=document.getElementById("registrationForm");
+
+form.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+document.getElementById("nameError").innerHTML="";
+document.getElementById("emailError").innerHTML="";
+document.getElementById("phoneError").innerHTML="";
+document.getElementById("interestError").innerHTML="";
+document.getElementById("successMsg").innerHTML="";
+
+let name=document.getElementById("name").value.trim();
+let email=document.getElementById("email").value.trim();
+let phone=document.getElementById("phone").value.trim();
+let interest=document.getElementById("interest").value;
+
+let valid=true;
+
+// Name Validation
+if(name===""){
+document.getElementById("nameError").innerHTML="Name is required";
+valid=false;
+}
+
+// Email Validation
+let emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if(email===""){
+document.getElementById("emailError").innerHTML="Email is required";
+valid=false;
+}
+else if(!emailPattern.test(email)){
+document.getElementById("emailError").innerHTML="Invalid email format";
+valid=false;
+}
+
+// Phone Validation
+let phonePattern=/^[6-9]\d{9}$/;
+
+if(phone===""){
+document.getElementById("phoneError").innerHTML="Phone number is required";
+valid=false;
+}
+else if(!phonePattern.test(phone)){
+document.getElementById("phoneError").innerHTML="Enter a valid 10-digit phone number";
+valid=false;
+}
+
+// Interest Validation
+if(interest===""){
+document.getElementById("interestError").innerHTML="Please select an interest";
+valid=false;
+}
+
+if(valid){
+
+document.getElementById("successMsg").innerHTML=
+"Registration Successful!";
+
+form.reset();
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
+
